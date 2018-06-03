@@ -27,8 +27,6 @@ import org.mortbay.log.Log;
 import webtrale.labels.SubjSprCompsArgstModLabeler;
 
 public class WebTraleServer {
- 
-    
 
     public static String __WEBTRALE_HOME = System.getenv("WEBTRALE_HOME");
     // Set to localhost if you have the sicstus and trale installation locally on your machine.
@@ -37,7 +35,7 @@ public class WebTraleServer {
     // The following URL points to trale.server.uni-frankfurt.de
     public static String __TRALE_SERVER_HOST = "141.2.159.95";
     public static int __TRALE_SERVER_PORT = 3333;
-    
+
     // interface URL: e.g., http://127.0.0.1:9999/wt/
     public static int __SERVER_PORT = 9999;
     public static boolean __ALLOW_REMOTE_CONNECTIONS;
@@ -55,8 +53,7 @@ public class WebTraleServer {
     public static String __ADMIN_PASS;
     public static String __USER_REALM_NAME = "WebTRALE";
     public static boolean __TESTING;
-   
-    
+
     final static String _ADMIN_USER = "admin";
     static Server _server;
 
@@ -186,11 +183,9 @@ class WebTraleServlet extends HttpServlet {
         // This is the path from which the jar file is started!
         String jarStartPath = System.getProperty("user.dir");
         System.out.println(jarStartPath);
-         if(!jarStartPath.contains("tomcat7")) {
-             jarStartPath = jarStartPath + "/../grammars/example_grammar/";
-         }
-        
-        
+        if (!jarStartPath.contains("tomcat7")) {
+            jarStartPath = jarStartPath + "/../grammars/example_grammar/";
+        }
 
         Scanner s = null;
         File signatureFile = new File(jarStartPath + "/" + fileName);
@@ -198,12 +193,12 @@ class WebTraleServlet extends HttpServlet {
             System.err.println("File " + jarStartPath + "/" + fileName + " "
                     + "cannot be found!");
         }
-       
+
         try {
             s = new Scanner(signatureFile, "UTF-8");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WebTraleServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         System.err.println("Scanning file " + fileName + "; getting types.");
         // skip one line.
         s.nextLine();
@@ -241,7 +236,6 @@ class WebTraleServlet extends HttpServlet {
         rval.add("@rais_pred");
         // TODO: more...
 
-
         return rval;
     }
     static String _notFoundFmt = loadResource("/_not-found.html");
@@ -250,8 +244,8 @@ class WebTraleServlet extends HttpServlet {
         try {
             Reader r = new BufferedReader(
                     new InputStreamReader(
-                    WebTraleServlet.class.getResourceAsStream(
-                    WebTrale.RESOURCE_PATH + path)));
+                            WebTraleServlet.class.getResourceAsStream(
+                                    WebTrale.RESOURCE_PATH + path)));
             int c;
             StringBuilder sb = new StringBuilder();
             while ((c = r.read()) != -1) {
@@ -327,7 +321,6 @@ class WebTraleServlet extends HttpServlet {
 
         // niko.
         //System.err.println("user: " + request.getRemoteUser());
-
         if (!WebTraleServer.__TESTING && !WebTraleServer.__NO_AUTH
                 && (request.getRemoteUser() == null
                 || (path.startsWith("/wt/00") && !request.getRemoteUser().equals(WebTraleServer._ADMIN_USER)))) {
@@ -354,15 +347,13 @@ class WebTraleServlet extends HttpServlet {
             if (path.equals("/applet")) {
                 path = "/__applet.html";
             }
-            
-            
+
             // This maps URLS to content that is being generated.
             // E.g., http://localhost:8888/wt/__rules.html -> write to <frame src="__rules.html"/> in index.html
             // Currently they are all sent to separate frames.
             // What we need is a way to replace these frames by interactive (mouse hover) show/hide functionality.
             // Probably they can still be kept in frames, but there needs to be some additional functionality 
             // encoded into the old-school, static _index.html.
-            
             // Add more page contents if necessary here.
             if (path.equals("/rec") || path.equals("/lex")
                     || path.equals("/words.html") || path.equals("/words")
@@ -462,7 +453,6 @@ class WebTraleServlet extends HttpServlet {
     void processQuery(String method, HttpServletRequest req, HttpServletResponse res)
             throws Exception {
 
-
         String q = "";
         // niko.
         // constraint field.
@@ -478,7 +468,6 @@ class WebTraleServlet extends HttpServlet {
             System.out.println("q: " + q);
 
             // System.out.println("types from signature: " + typesFromSignature);
-
             //niko.
             String constraint = req.getParameter("constraint");
             if (constraint != null) {
@@ -497,7 +486,6 @@ class WebTraleServlet extends HttpServlet {
                     }
                 }
             }
-
 
             if (q == null) {
                 throw new IllegalArgumentException("Missing parameter: q");
@@ -582,7 +570,6 @@ class WebTraleServlet extends HttpServlet {
             }
 
             //System.out.println(stringFromBytes);
-
             // Try to apply the transformation on the XML!
             Stylizer st = new Stylizer();
             //System.out.println("String from bytes: " + stringFromBytes);
@@ -598,22 +585,18 @@ class WebTraleServlet extends HttpServlet {
                 html = labelNodesAccordingToGertsRequirements(html);
             }
 
-
             //System.out.println("bytes (1): ");
             res.getOutputStream().print(html);
             // ignore the send bytes at the end.
             sendHTMLrightAway = true;
 
-
-        } 
-        // Antonio:
+        } // Antonio:
         // Called if user clicks on a lex entry on the left-hand side.
         else if ("lex".equals(method)) {
             System.out.println("Lexicon entry clicked.");
 
             // That's how it was in the original webtrale code !!
             //bytes = _wt.lexToXmlByteArray(q);
-
             // New Gert requirement:
             // parse the lexicon entry as a single word
             // using the constraint "word".
@@ -622,7 +605,6 @@ class WebTraleServlet extends HttpServlet {
                     WebTraleServer.__MAX_RESULTS,
                     WebTraleServer.__MAX_WORDS,
                     "word");
-
 
             Utils util = new Utils();
             String stringFromBytes = util.getStringFromBytes(bytes);
@@ -638,11 +620,9 @@ class WebTraleServlet extends HttpServlet {
             // Simplify lexicon entries.
             //SubcatListLabelerForLexiconEntries sll = new SubcatListLabelerForLexiconEntries();
             //html = sll.putLabelsIntoSubcatList(html);
-
             if (MODIFY_NODE_LABELS_ACCORDING_TO_GERTS_REQUIREMENTS) {
                 html = labelNodesAccordingToGertsRequirements(html);
             }
-
 
             bytes = html.getBytes();
             res.getOutputStream().print(html);
@@ -652,20 +632,16 @@ class WebTraleServlet extends HttpServlet {
             //System.out.println("--> " + 
             //cs.decode(java.nio.ByteBuffer.wrap(bytes)));
 
-            
-
         } else if ("words".equals(method)) {
-            
+
             bytes = _wt.wordsToXmlByteArray();
-            
+
             //System.out.println("bytes (3): ");
         } // Called when the program is initialized. (loaded at the beginning?) yes.
         else if ("words.html".equals(method)) {
-            
+
             bytes = _wt.wordsToHtmlByteArray();
-            
-            
-            
+
             //System.out.println("bytes (4): ");
         } else if ("__testitems.html".equals(method)) {
             bytes = _wt.testitemsToHtmlByteArray();
@@ -699,15 +675,10 @@ class WebTraleServlet extends HttpServlet {
             bytes = Utils.gzipBytes(bytes);
         }
 
-
-
         if (!sendHTMLrightAway) {
             _cache.insert(cacheKey, bytes);
             sendBytes(res, bytes, contentType, isGzipped);
         }
-
-
-
 
     }
 
@@ -761,7 +732,7 @@ class WebTraleServlet extends HttpServlet {
         if (WebTraleServer.__MULTIUSER) {
             return sendResource("_index.html", response);
         }
-       return sendResource("/_index.html", response);
+        return sendResource("/_index.html", response);
     }
 
     static String normalize(String s) {

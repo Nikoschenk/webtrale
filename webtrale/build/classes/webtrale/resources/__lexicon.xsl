@@ -16,15 +16,19 @@
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
                 <base target="viewpan"/>
                 <style>
-                    .list{
-                    background-color: #02111b;
+                    .main-lexicon-list{
+                    background-color:#15344e;
+                    width:50%;
+                    margin:auto;
+                    border-radius:45px;
+                    
                    
                     } 
                     li a{
                     color:white;
                     font-family: 'Tangerine';font-size: 13px;
                     
-                    text-align: justify;
+                    text-align: center;
             
                     } 
                     ul{
@@ -36,71 +40,49 @@
                     list-style-type: none;
                     margin: auto;
                     text-align: center;
+                    background-color:#15344e;
                     }
                     div{
                     height: 100%;
                     width:100%;
                     float:left;
                     text-align: center;
+                    background-color:#15344e;
                     
                     }  
-                    table {
-                    font-family: arial, sans-serif;
-                    border-style:10px solid;
-          
-                    border-color:#02111b;
-                    width: 100%;
-                    }
-
-                    td, th {
                     
-                 
-                    padding: 7px;
-                  
-                    text-align: center;
-                    }
 
-                    tr:nth-child(even) {
-                  
-                    }
-                    a{
-                    color:white;
-                    font-family: 'Tangerine';font-size: 13px;
+                    /* lexicon-list */
+                    #lexicon-list { width:350px; font-family:Georgia, Times, serif; font-size:20px;margin:auto }
+                    #lexicon-list ul { list-style: none;  border-radius:45px;}
+                    #lexicon-list ul li a { display:block; text-decoration:none; color:white; background-color:#15344e; line-height:30px;
+                    border-bottom-style:solid; border-bottom-width:1px; border-bottom-color:#CCCCCC;margin:auto; cursor:pointer; }
+                    #lexicon-list ul li a:hover { color:aqua; background-color:#15344e; background-repeat:repeat-x; }
+                    #lexicon-list ul li a strong { text-align: center; font-size:20px;}
                     
-                    text-align: justify;
-            
-                    } 
+
                 </style>
       
             </head>
-            <body class="list">
-                <div  >
-                  
-                    <xsl:for-each select="//word">
-                            
-                        <table>
-                            <tr>
-                                <th></th>
-                                    
-   
-                            </tr>
-                            <tr>
-                                    
-                                <td>
-                                    <a href="lex?q={@uri-encoded-utf8}">
-                                        <xsl:value-of select="."/>
-                                    </a>
-                                </td>
-    
-                            </tr>
-  
-  
-                        </table>
-                            
            
+            <body >
+            
+                <div id="lexicon-list" >
+                    <xsl:for-each select="//word">
+                        <ul class="main-lexicon-list">
+                            <li>
+                                <a href="lex?q={@uri-encoded-utf8}">
+                                    <strong>
+                                        <xsl:value-of select="."/>
+                                    </strong> 
+                                </a>
+                            </li>
+                        </ul>
+
                     </xsl:for-each>
-                    
+                
                 </div>
+               
             </body>
         </html>
 

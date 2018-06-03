@@ -5,10 +5,13 @@ function build_struct_info(id) {
   s.id = id;
   s.holder = document.getElementById("struct-" + id);
   s.node = first_child_of_class(s.holder, "tree-node");
+
   if (s.node == null) {
     s.node = first_child_of_class(s.holder, "fs-otab");
   }
+
   s.is_tree = s.node.className == "tree-node";
+  
   if (s.is_tree) {
     var ls = new Array();
     s.fs_tree_root = build_fs_tree(s.holder, ls);
@@ -327,7 +330,12 @@ function expand_collapse_tag(tag) {
   }
 }
 
+
+
+var data = [];
+
 function expand_collapse_fs(type) {
+
   if (type._fs) {
     if (type._fs.style.display == "none")
       type._fs.style.display = "";
@@ -337,23 +345,55 @@ function expand_collapse_fs(type) {
   }
   else {
     type._fs = type.parentNode.parentNode.parentNode.rows[1].cells[0];
+
     expand_collapse_fs(type);
   }
+  //console.log("type: "+type.parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML);
+  // gets a list of all names ....  
+  var x = document.getElementsByClassName("f-name");
+  //var controls = document.getElementById("controls");
+  for(let i = 0; i<x.length; i++){
+    //console.log("on: "+x[i].innerHTML); 
+    //controls.innerHTML =x[i].innerHTML+"<br>";
+    data[i]=x[i].innerHTML;
+    
+
+
+  }
+  
+}
+
+//var c = document.getElementById("main");
+function f (){
+    console.log(data[0]);
+    for(var item = 0; item<data.length;item++){
+       console.log("data "+data[item]);
+       //c.innerHTML = data[i];
+    }
 }
 
 function expand_collapse_node(node_label) {
   expand_collapse_fs(node_label);
+  //console.log("node label: "+node_label.innerHTML);
 }
-
+// here
 function expand_collapse_feat(feat) {
+
   var val = feat.parentNode.cells[1];
+  var cells = feat.parentNode.cells;
+  
+
+  //console.log("feat: "+ feat.innerHTML);
+  //console.log("feat: "+ val.innerHTML);
+
+  
   if (val.style.display == "none") {
     val.style.display = "";
-    feat.style.color = "black";
+    feat.style.color = "red";
   }
   else {
     val.style.display = "none";
-    feat.style.color = "gray";
+    feat.style.color = "blue";
   }
   
   update();
@@ -394,21 +434,37 @@ function drawTo3rdPanel() {
   window.parent.frames[3].document.body.innerHTML = "<h2>Parse Chart</h2>";
 }
 
-
 function showhide_parsechart() {
-      
-    
-    
+   
     var e = document.getElementById("parsechartdiv");
-       if(e.style.display == 'block')
+       if(e.style.display == 'block'){
           e.style.display = 'none';
-       else
+          
+       }else{
           e.style.display = 'block';
-      
-      
-      
-      
+          
+       }
+            
 }
+
+//Antonio
+document.addEventListener("click", myFunction);
+
+function myFunction() {
+
+    var parseChart = document.getElementById("hideparsechartbuttondiv");
+
+    if(parseChart.innerHTML == "hide parse chart"){
+
+      // to do
+    }else{
+      // to do
+    
+    }
+    
+    
+}
+
 
 function init_view() {
   fix_div_roots();

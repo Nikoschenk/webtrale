@@ -18,10 +18,8 @@
     document.body.style.backgroundColor = "white";
   }
 
- 
 
-
-// deprecated --> not in use, left for future use
+// deprecated --> not in use after changing frames into objects
 /*
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {

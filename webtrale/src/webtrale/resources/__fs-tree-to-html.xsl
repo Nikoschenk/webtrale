@@ -41,7 +41,7 @@
                         
                         <div id="hideparsechartbuttondiv">
                         <span class="tbutton" onclick="showhide_parsechart()">
-                            hide parse chart
+                            parse chart
                         </span>
                         </div>
                         
