@@ -352,12 +352,11 @@ function expand_collapse_fs(type) {
   // gets a list of all names ....  
   var x = document.getElementsByClassName("f-name");
   //var controls = document.getElementById("controls");
-  for(let i = 0; i<x.length; i++){
+  for( i = 0; i<x.length; i++){
     //console.log("on: "+x[i].innerHTML); 
     //controls.innerHTML =x[i].innerHTML+"<br>";
     data[i]=x[i].innerHTML;
     
-
 
   }
   
