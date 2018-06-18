@@ -542,7 +542,7 @@ class WebTraleServlet extends HttpServlet {
 
         incStat("num-req-" + method);
 
-        System.out.println(method + " <<<");
+        //System.out.println(method + " <<<");
 
         // Antonio:
         // niko. called if user enters something into the text field.

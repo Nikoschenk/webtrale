@@ -630,7 +630,7 @@ public class WebTrale {
     }
 
     byte[] wordsToHtmlByteArray() {
-        System.out.println("Words to HTML byte array called.");
+        //System.out.println("Words to HTML byte array called.");
         StringBuilder sb = new StringBuilder();
 
         //sb.append("<?xml-stylesheet href='__lexicon.xsl' type='text/xsl'?>\n");
@@ -650,7 +650,7 @@ public class WebTrale {
 
         sb.append("</words>");
        
-        System.out.println(sb.toString());
+        //System.out.println(sb.toString());
 
         try {
             Transformer t = loadStylesheet(TransformerFactory.newInstance(),
