@@ -29,12 +29,6 @@ trale_server_start(your_port). // 3333 for instance
 ```
 
 
-```
-
-
-```
-
-
 ### 3.) Start up a webtrale instance
 ##### i.) either from the source files run WebTraleServer.java 
 ##### ii.) or generate a runnable jar from the project and exectute the following command:
