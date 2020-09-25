@@ -10,13 +10,30 @@ For any other IDE, just copy the source files under /src into the resp. source f
 
 ### 2.) Start up a sample grammar
 There is one located under grammar/lrs_grammar/
+
 Note that a Trale installation is required for this to work (including a prior Sicstus 3 version).
 
-```/path/to/trale/installdir/trale -sfG
+```
+# Navigate to grammar
+cd grammar/lrs_grammar/
+
+# Start Trale
+/path/to/trale/installdir/trale -sfG
+# e.g.,
+/home/tuxedo/GrammarEngineering/TRALE-latest/trale -sufG
+# Compile grammar
 c.
+# Start interface.
 [wtx].
 trale_server_start(your_port). // 3333 for instance
 ```
+
+
+```
+
+
+```
+
 
 ### 3.) Start up a webtrale instance
 ##### i.) either from the source files run WebTraleServer.java 
